@@ -3,27 +3,26 @@ from pathlib import Path
 from pypdf import PdfReader
 
 
-class PDFReader:
+class PDFLoader:
+    """
+    Reads PDF documents and extracts all text.
+    """
 
     @staticmethod
-    def extract_text(pdf_path: str):
+    def load(file_path: str | Path) -> str:
 
-        reader = PdfReader(pdf_path)
+        reader = PdfReader(file_path)
 
         pages = []
 
-        for index, page in enumerate(reader.pages):
+        for page in reader.pages:
 
             text = page.extract_text()
 
             if text:
+                pages.append(text)
 
-                pages.append({
-                    "page": index + 1,
-                    "text": text
-                })
-
-        return pages
+        return "\n".join(pages)
 
 
-pdf_reader = PDFReader()
+pdf_loader = PDFLoader()

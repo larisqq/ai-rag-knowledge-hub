@@ -1,45 +1,24 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
-class Chunker:
+class TextChunker:
+    """
+    Splits long text into overlapping chunks.
+    """
 
-    def __init__(self):
-
+    def __init__(
+        self,
+        chunk_size: int = 1000,
+        chunk_overlap: int = 200,
+    ):
         self.splitter = RecursiveCharacterTextSplitter(
-
-            chunk_size=1000,
-
-            chunk_overlap=200,
-
-            separators=[
-                "\n\n",
-                "\n",
-                ". ",
-                " ",
-                ""
-            ]
-
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
         )
 
-    def split(self, pages):
+    def split(self, text: str) -> list[str]:
 
-        chunks = []
-
-        for page in pages:
-
-            texts = self.splitter.split_text(page["text"])
-
-            for text in texts:
-
-                chunks.append({
-
-                    "page": page["page"],
-
-                    "content": text
-
-                })
-
-        return chunks
+        return self.splitter.split_text(text)
 
 
-chunker = Chunker()
+text_chunker = TextChunker()
