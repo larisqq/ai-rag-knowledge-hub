@@ -11,7 +11,10 @@ router = APIRouter(
 
 @router.post("/upload")
 async def upload_document(file: UploadFile = File(...)):
+    """
+    Upload a PDF document and index it for semantic search.
+    """
 
     await validate_pdf(file)
 
-    return await document_service.save_pdf(file)
+    return await document_service.upload(file)

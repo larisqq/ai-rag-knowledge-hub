@@ -16,6 +16,20 @@ class Settings(BaseSettings):
 
     chroma_db_path: str
 
+    ollama_model: str = "llama3.2:3b"
+
+    embedding_model: str = "nomic-embed-text"
+
+    retrieval_results: int = 4
+
+    chunk_size: int = 1000
+
+    chunk_overlap: int = 200
+    
+    chroma_collection: str = "documents"
+    
+    upload_folder: str = "app/uploads/pdfs"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",

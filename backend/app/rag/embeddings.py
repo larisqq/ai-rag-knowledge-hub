@@ -1,4 +1,5 @@
 from langchain_ollama import OllamaEmbeddings
+from app.core.config import settings
 
 
 class EmbeddingService:
@@ -9,7 +10,8 @@ class EmbeddingService:
 
     def __init__(self):
         self.model = OllamaEmbeddings(
-            model="nomic-embed-text"
+            model=settings.embedding_model,
+            base_url=settings.ollama_base_url
         )
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
