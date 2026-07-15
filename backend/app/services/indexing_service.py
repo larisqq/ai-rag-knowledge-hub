@@ -13,7 +13,10 @@ class IndexingService:
     """
 
     @staticmethod
-    def index_document(pdf_path: str):
+    def index_document(
+    pdf_path: str,
+    original_filename: str
+):
 
         pdf_path = str(pdf_path)
 
@@ -45,7 +48,8 @@ class IndexingService:
             metadatas.append(
                 {
                     "source": pdf_path,
-                    "filename": filename,
+                    "filename": original_filename,
+                    "stored_filename": filename,
                     "chunk_index": index,
                     "total_chunks": len(chunks),
                 }
@@ -53,7 +57,7 @@ class IndexingService:
 
         print("Saving to ChromaDB...")
 
-        vector_store.collection.add(
+        vector_store.add(
             ids=ids,
             documents=chunks,
             embeddings=embeddings,

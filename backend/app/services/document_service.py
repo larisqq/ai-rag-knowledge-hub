@@ -53,7 +53,8 @@ class DocumentService:
 
         # Index document.
         indexed_chunks = indexing_service.index_document(
-            document["path"]
+            pdf_path=document["path"],
+            original_filename=document["original_filename"]
         )
 
         # Include indexing information.
