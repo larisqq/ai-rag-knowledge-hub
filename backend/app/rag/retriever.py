@@ -1,14 +1,21 @@
+from app.core.config import settings
 from app.rag.embeddings import embedding_service
 from app.rag.vector_store import vector_store
 
 
 class Retriever:
     """
-    Retrieves the most relevant chunks from ChromaDB.
+    Retrieves the most relevant document chunks from ChromaDB.
     """
 
     @staticmethod
-    def search(query: str, n_results: int = 4):
+    def search(
+        query: str,
+        n_results: int = settings.retrieval_results,
+    ):
+        """
+        Search the vector database for the most relevant chunks.
+        """
 
         print("Generating query embedding...")
 

@@ -1,3 +1,4 @@
+from pathlib import Path
 from uuid import uuid4
 
 from app.rag.loader import pdf_loader
@@ -13,7 +14,9 @@ class IndexingService:
 
     @staticmethod
     def index_document(pdf_path: str):
+
         pdf_path = str(pdf_path)
+
         print("Loading PDF...")
 
         text = pdf_loader.load(pdf_path)
@@ -34,18 +37,27 @@ class IndexingService:
 
         ids = [str(uuid4()) for _ in chunks]
 
+        filename = Path(pdf_path).name
+
+        metadatas = []
+
+        for index in range(len(chunks)):
+            metadatas.append(
+                {
+                    "source": pdf_path,
+                    "filename": filename,
+                    "chunk_index": index,
+                    "total_chunks": len(chunks),
+                }
+            )
+
         print("Saving to ChromaDB...")
 
         vector_store.collection.add(
             ids=ids,
             documents=chunks,
             embeddings=embeddings,
-            metadatas=[
-                {
-                    "source": pdf_path
-                }
-                for _ in chunks
-            ]
+            metadatas=metadatas,
         )
 
         print("Done!")
