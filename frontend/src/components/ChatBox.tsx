@@ -49,6 +49,20 @@ export default function ChatBox() {
           <h3>Answer</h3>
 
           <p>{response.answer}</p>
+
+          {response.sources.length > 0 && (
+            <>
+              <h3>Sources</h3>
+
+              <ul>
+                {response.sources.map((source) => (
+                  <li key={`${source.filename}-${source.chunk_index}`}>
+                    {source.filename} (chunk {source.chunk_index})
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
     </div>
