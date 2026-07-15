@@ -4,6 +4,7 @@ import { api } from "../services/api";
 
 import DocumentList from "../components/DocumentList";
 import UploadCard from "../components/UploadCard";
+import ChatBox from "../components/ChatBox";
 
 import type { IndexedDocument } from "../types/document";
 
@@ -27,6 +28,7 @@ export default function HomePage() {
       <UploadCard onUploadComplete={loadDocuments} />
 
       <DocumentList documents={documents} />
+      <ChatBox />
     </div>
   );
 }

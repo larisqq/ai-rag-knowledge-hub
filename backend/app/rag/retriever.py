@@ -23,8 +23,8 @@ class Retriever:
 
         print("Searching ChromaDB...")
 
-        results = vector_store.query(
-            query_embeddings=[query_embedding],
+        results = vector_store.search(
+            embedding=query_embedding,
             n_results=n_results,
         )
 
