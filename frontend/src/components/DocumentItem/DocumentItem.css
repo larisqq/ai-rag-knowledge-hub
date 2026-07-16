@@ -1,0 +1,32 @@
+.document-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  padding: 14px;
+
+  margin-bottom: 12px;
+
+  background: white;
+
+  transition: .2s;
+}
+
+.document-item:hover {
+  border-color: #2563eb;
+
+  transform: translateY(-2px);
+}
+
+.document-name {
+  font-weight: 600;
+
+  margin-bottom: 6px;
+
+  word-break: break-word;
+}
+
+.document-chunks {
+  color: #64748b;
+
+  font-size: .9rem;
+}

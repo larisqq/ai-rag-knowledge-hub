@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { api } from "../services/api";
+
+import { api } from "../../services/api";
+
+import Card from "../Card/Card";
+
+import "./UploadCard.css";
 
 interface Props {
   onUploadComplete: () => void;
@@ -7,10 +12,11 @@ interface Props {
 
 export default function UploadCard({ onUploadComplete }: Props) {
   const [file, setFile] = useState<File | null>(null);
+
   const [uploading, setUploading] = useState(false);
 
   async function handleUpload() {
-    if (!file) {
+    if (!file || uploading) {
       return;
     }
 
@@ -38,18 +44,20 @@ export default function UploadCard({ onUploadComplete }: Props) {
   }
 
   return (
-    <div>
-      <h2>Upload Document</h2>
+    <Card title="Upload Document">
+      <div className="upload-card">
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+        />
 
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-      />
+        {file && <p className="selected-file">📄 {file.name}</p>}
 
-      <button onClick={handleUpload} disabled={!file || uploading}>
-        {uploading ? "Processing..." : "Upload"}
-      </button>
-    </div>
+        <button onClick={handleUpload} disabled={!file || uploading}>
+          {uploading ? "Processing..." : "Upload"}
+        </button>
+      </div>
+    </Card>
   );
 }

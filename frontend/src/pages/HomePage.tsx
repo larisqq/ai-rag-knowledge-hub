@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { api } from "../services/api";
+import UploadCard from "../components/UploadCard/UploadCard";
+import DocumentList from "../components/DocumentList/DocumentList";
+import ChatBox from "../components/ChatBox/ChatBox";
 
-import DocumentList from "../components/DocumentList";
-import UploadCard from "../components/UploadCard";
-import ChatBox from "../components/ChatBox";
+import { api } from "../services/api";
 
 import type { IndexedDocument } from "../types/document";
 
@@ -12,7 +12,7 @@ export default function HomePage() {
   const [documents, setDocuments] = useState<IndexedDocument[]>([]);
 
   async function loadDocuments() {
-    const response = await api.get("/documents");
+    const response = await api.get<IndexedDocument[]>("/documents");
 
     setDocuments(response.data);
   }
@@ -28,6 +28,7 @@ export default function HomePage() {
       <UploadCard onUploadComplete={loadDocuments} />
 
       <DocumentList documents={documents} />
+
       <ChatBox />
     </div>
   );

@@ -1,0 +1,16 @@
+.upload-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.selected-file {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+  word-break: break-word;
+}
+
+.upload-card button {
+  width: fit-content;
+}
