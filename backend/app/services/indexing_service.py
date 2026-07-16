@@ -40,7 +40,7 @@ class IndexingService:
 
         ids = [str(uuid4()) for _ in chunks]
 
-        filename = Path(pdf_path).name
+        stored_filename = Path(pdf_path).name
 
         metadatas = []
 
@@ -49,11 +49,12 @@ class IndexingService:
                 {
                     "source": pdf_path,
                     "filename": original_filename,
-                    "stored_filename": filename,
+                    "stored_filename": stored_filename,
                     "chunk_index": index,
                     "total_chunks": len(chunks),
                 }
             )
+            
 
         print("Saving to ChromaDB...")
 

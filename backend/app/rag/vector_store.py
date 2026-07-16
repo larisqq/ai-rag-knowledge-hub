@@ -1,3 +1,4 @@
+
 from chromadb import PersistentClient
 
 from app.core.config import settings
@@ -63,6 +64,19 @@ class VectorStore:
 
         self.collection.delete(
             ids=ids
+        )
+    def delete_by_stored_filename(
+        self,
+        stored_filename: str,
+    ):
+        """
+        Delete every chunk belonging to a stored PDF.
+        """
+
+        self.collection.delete(
+            where={
+                "stored_filename": stored_filename,
+            }
         )
 
 

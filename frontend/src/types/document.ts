@@ -1,4 +1,7 @@
 export interface IndexedDocument {
-    filename: string;
-    chunks: number;
+  filename: string;
+
+  stored_filename: string;
+
+  chunks: number;
 }

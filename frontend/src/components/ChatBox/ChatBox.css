@@ -1,15 +1,38 @@
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  height: 500px;
+  overflow-y: auto;
+
+  margin-bottom: 20px;
+  padding: 8px;
+}
+
 .chat-input {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  align-items: center;
 }
 
 .chat-input input {
   flex: 1;
 }
 
-.chat-history {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.chat-input button {
+  white-space: nowrap;
+}
+
+.chat-history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: transparent;
 }

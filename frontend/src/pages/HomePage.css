@@ -1,0 +1,19 @@
+.page {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+
+  gap: 24px;
+
+  align-items: start;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+.main-content {
+  min-width: 0;
+}

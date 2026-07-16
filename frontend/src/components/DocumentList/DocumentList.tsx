@@ -3,19 +3,29 @@ import type { IndexedDocument } from "../../types/document";
 import Card from "../Card/Card";
 import DocumentItem from "../DocumentItem/DocumentItem";
 
-export default function DocumentList({
-  documents,
-}: {
+import "./DocumentList.css";
+
+interface Props {
   documents: IndexedDocument[];
-}) {
+
+  onDelete: (storedFilename: string) => void;
+}
+
+export default function DocumentList({ documents, onDelete }: Props) {
   return (
     <Card title="Indexed Documents">
       {documents.length === 0 ? (
         <p>No documents uploaded.</p>
       ) : (
-        documents.map((document) => (
-          <DocumentItem key={document.filename} document={document} />
-        ))
+        <div className="document-list">
+          {documents.map((document) => (
+            <DocumentItem
+              key={document.stored_filename}
+              document={document}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
       )}
     </Card>
   );

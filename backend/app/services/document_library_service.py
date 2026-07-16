@@ -9,22 +9,29 @@ class DocumentLibraryService:
     @staticmethod
     def list_documents():
         """
-        Return a list of indexed documents.
+        Return a deduplicated list of indexed documents.
         """
 
         results = vector_store.get_all()
 
         documents = {}
 
-        for metadata in results["metadatas"]:
+        for metadata in results.get("metadatas", []):
+            if not metadata:
+                continue
 
-            filename = metadata["filename"]
+            stored_filename = metadata.get("stored_filename")
+            filename = metadata.get("filename")
+            total_chunks = metadata.get("total_chunks", 0)
 
-            if filename not in documents:
+            if not stored_filename or not filename:
+                continue
 
-                documents[filename] = {
+            if stored_filename not in documents:
+                documents[stored_filename] = {
                     "filename": filename,
-                    "chunks": metadata["total_chunks"],
+                    "stored_filename": stored_filename,
+                    "chunks": total_chunks,
                 }
 
         return list(documents.values())

@@ -6,7 +6,6 @@ from app.utils.validators import validate_pdf
 from app.services.document_library_service import (
     document_library_service,
 )
-
 from app.schemas.document import IndexedDocument
 
 router = APIRouter(
@@ -35,3 +34,13 @@ def list_documents():
     """
 
     return document_library_service.list_documents()
+
+@router.delete("/{stored_filename}")
+def delete_document(stored_filename: str):
+    """
+    Delete an indexed document.
+    """
+
+    return document_service.delete(
+        stored_filename
+    )

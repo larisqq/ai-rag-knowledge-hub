@@ -75,9 +75,16 @@ export default function ChatBox() {
   function clearChat() {
     setMessages([]);
   }
-
   return (
     <Card title="Ask AI">
+      <div className="chat-history">
+        {messages.map((message, index) => (
+          <MessageBubble key={index} message={message} />
+        ))}
+
+        <div ref={bottomRef} />
+      </div>
+
       <div className="chat-input">
         <input
           type="text"
@@ -98,14 +105,6 @@ export default function ChatBox() {
         <button onClick={clearChat} disabled={messages.length === 0}>
           Clear
         </button>
-      </div>
-
-      <div className="chat-history">
-        {messages.map((message) => (
-          <MessageBubble key={message.id} message={message} />
-        ))}
-
-        <div ref={bottomRef} />
       </div>
     </Card>
   );
